@@ -16,21 +16,21 @@ export const Route = createFileRoute("/products/")({
   }),
   head: () => ({
     meta: [
-      { title: "Workspace Products — SetupForge" },
+      { title: "Developer Gear — DevSetupHQ" },
       {
         name: "description",
         content:
-          "Search and filter desk, developer and home office products by category, price range and rating.",
+          "Search and filter developer gear, coding keyboards, monitors, desk setups and home office products.",
       },
-      { property: "og:title", content: "Workspace Products — SetupForge" },
+      { property: "og:title", content: "Developer Gear — DevSetupHQ" },
       {
         property: "og:description",
-        content: "Search and filter desk, developer and home office products.",
+        content: "Search and filter developer gear, coding keyboards, monitors and desk setups.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/products" },
+      { property: "og:url", content: "https://gear-discovery-pro.lovable.app/products" },
     ],
-    links: [{ rel: "canonical", href: "/products" }],
+    links: [{ rel: "canonical", href: "https://gear-discovery-pro.lovable.app/products" }],
   }),
   component: ProductsPage,
 });

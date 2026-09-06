@@ -7,22 +7,22 @@ import { NewsletterForm } from "@/components/NewsletterForm";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
-      { title: "About SetupForge — Product Research for Better Workspaces" },
+      { title: "About DevSetupHQ — Product Research for Better Workspaces" },
       {
         name: "description",
         content:
-          "SetupForge helps people build better workspaces by researching technology, desk accessories and productivity products so buying decisions get easier.",
+          "DevSetupHQ helps people build better workspaces by researching technology, desk accessories and productivity products so buying decisions get easier.",
       },
-      { property: "og:title", content: "About SetupForge" },
+      { property: "og:title", content: "About DevSetupHQ" },
       {
         property: "og:description",
         content:
           "We research workspace technology and accessories so you can make better buying decisions, faster.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/about" },
+      { property: "og:url", content: "https://gear-discovery-pro.lovable.app/about" },
     ],
-    links: [{ rel: "canonical", href: "/about" }],
+    links: [{ rel: "canonical", href: "https://gear-discovery-pro.lovable.app/about" }],
   }),
   component: AboutPage,
 });
@@ -51,7 +51,7 @@ function AboutPage() {
       <PageHeader
         eyebrow="About"
         title="We make workspace research boringly simple"
-        intro="SetupForge helps people build better workspaces by discovering useful technology, desk accessories and productivity products."
+        intro="DevSetupHQ helps people build better workspaces by discovering useful technology, desk accessories and productivity products."
       />
 
       <section className="bg-white">
@@ -69,7 +69,7 @@ function AboutPage() {
                 honestly, including where a product falls short.
               </p>
               <p className="mt-5 font-sans text-base text-brand/65 leading-[1.75]">
-                Every recommendation on SetupForge is written for people who work at a desk for a
+                Every recommendation on DevSetupHQ is written for people who work at a desk for a
                 living: developers, designers, writers, analysts, and anyone whose home office also
                 has to be a living room.
               </p>

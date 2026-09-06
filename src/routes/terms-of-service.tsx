@@ -5,32 +5,32 @@ import { LegalPage } from "@/components/LegalPage";
 export const Route = createFileRoute("/terms-of-service")({
   head: () => ({
     meta: [
-      { title: "Terms of Service — SetupForge" },
+      { title: "Terms of Service — DevSetupHQ" },
       {
         name: "description",
         content:
-          "The terms covering use of SetupForge, our product recommendations and outbound affiliate links.",
+          "The terms covering use of DevSetupHQ, our product recommendations and outbound affiliate links.",
       },
-      { property: "og:title", content: "Terms of Service — SetupForge" },
+      { property: "og:title", content: "Terms of Service — DevSetupHQ" },
       {
         property: "og:description",
-        content: "The terms covering use of SetupForge and our product recommendations.",
+        content: "The terms covering use of DevSetupHQ and our product recommendations.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/terms-of-service" },
+      { property: "og:url", content: "https://gear-discovery-pro.lovable.app/terms-of-service" },
     ],
-    links: [{ rel: "canonical", href: "/terms-of-service" }],
+    links: [{ rel: "canonical", href: "https://gear-discovery-pro.lovable.app/terms-of-service" }],
   }),
   component: () => (
     <LegalPage
       eyebrow="Legal"
       title="Terms of Service"
-      intro="Placeholder terms for the SetupForge website. Replace with your reviewed legal copy before launch."
+      intro="Placeholder terms for the DevSetupHQ website. Replace with your reviewed legal copy before launch."
       sections={[
         {
           heading: "Using this site",
           body: [
-            "SetupForge publishes editorial product research. Content is provided for general information and is not professional advice.",
+            "DevSetupHQ publishes editorial product research. Content is provided for general information and is not professional advice.",
           ],
         },
         {

@@ -9,21 +9,21 @@ import { PageHeader } from "@/components/ui-bits";
 export const Route = createFileRoute("/guides/")({
   head: () => ({
     meta: [
-      { title: "Setup Guides & Buying Advice — SetupForge" },
+      { title: "Developer Guides & Workspace Ideas — DevSetupHQ" },
       {
         name: "description",
         content:
-          "Long-form setup ideas, buying guides and productivity advice for desks, home offices and developer workspaces.",
+          "Research-based guides, setup ideas and buying advice for developers building a better coding workspace.",
       },
-      { property: "og:title", content: "Setup Guides & Buying Advice — SetupForge" },
+      { property: "og:title", content: "Developer Guides & Workspace Ideas — DevSetupHQ" },
       {
         property: "og:description",
         content: "Setup ideas, buying guides and productivity advice for better workspaces.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/guides" },
+      { property: "og:url", content: "https://gear-discovery-pro.lovable.app/guides" },
     ],
-    links: [{ rel: "canonical", href: "/guides" }],
+    links: [{ rel: "canonical", href: "https://gear-discovery-pro.lovable.app/guides" }],
   }),
   component: GuidesPage,
 });
@@ -48,8 +48,8 @@ function GuidesPage() {
     <>
       <PageHeader
         eyebrow="03 — Reading"
-        title="Guides for a better workspace"
-        intro="Tested advice on desks, chairs, keyboards and the small accessories that quietly decide how a workspace feels."
+        title="Developer Guides & Workspace Ideas"
+        intro="Research-based guides on coding keyboards, monitors, chairs, desks and the productivity gear that shapes a developer workspace."
       />
 
       {featured && (

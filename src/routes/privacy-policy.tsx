@@ -5,27 +5,27 @@ import { LegalPage } from "@/components/LegalPage";
 export const Route = createFileRoute("/privacy-policy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — SetupForge" },
+      { title: "Privacy Policy — DevSetupHQ" },
       {
         name: "description",
         content:
-          "How SetupForge handles visitor data, analytics and newsletter subscriptions across the site.",
+          "How DevSetupHQ handles visitor data, analytics and newsletter subscriptions across the site.",
       },
-      { property: "og:title", content: "Privacy Policy — SetupForge" },
+      { property: "og:title", content: "Privacy Policy — DevSetupHQ" },
       {
         property: "og:description",
-        content: "How SetupForge handles visitor data, analytics and newsletter subscriptions.",
+        content: "How DevSetupHQ handles visitor data, analytics and newsletter subscriptions.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/privacy-policy" },
+      { property: "og:url", content: "https://gear-discovery-pro.lovable.app/privacy-policy" },
     ],
-    links: [{ rel: "canonical", href: "/privacy-policy" }],
+    links: [{ rel: "canonical", href: "https://gear-discovery-pro.lovable.app/privacy-policy" }],
   }),
   component: () => (
     <LegalPage
       eyebrow="Legal"
       title="Privacy Policy"
-      intro="A placeholder policy describing how SetupForge intends to handle visitor information. Replace this with your reviewed legal copy before launch."
+      intro="A placeholder policy describing how DevSetupHQ intends to handle visitor information. Replace this with your reviewed legal copy before launch."
       sections={[
         {
           heading: "What we collect",
@@ -43,7 +43,7 @@ export const Route = createFileRoute("/privacy-policy")({
         {
           heading: "Your choices",
           body: [
-            "You can unsubscribe from the newsletter at any time using the link in any email, or write to support@setupforge.com to request removal of your data.",
+            "You can unsubscribe from the newsletter at any time using the link in any email, or write to support@devsetuphq.com to request removal of your data.",
           ],
         },
       ]}
