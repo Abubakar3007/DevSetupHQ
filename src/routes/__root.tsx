@@ -77,14 +77,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "SetupForge — Build a Better Setup" },
+      { title: "DevSetupHQ — Build Your Ultimate Developer Setup" },
       {
         name: "description",
         content:
-          "SetupForge helps you discover the best desk, tech and home office products for a workspace that works.",
+          "DevSetupHQ helps you discover the best desk, tech and home office products for a workspace that works.",
       },
-      { name: "author", content: "SetupForge" },
-      { property: "og:site_name", content: "SetupForge" },
+      { name: "author", content: "DevSetupHQ" },
+      { property: "og:site_name", content: "DevSetupHQ" },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -104,8 +104,8 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         children: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "WebSite",
-          name: "SetupForge",
-          description: "Build a Better Setup.",
+          name: "DevSetupHQ",
+          description: "Build Your Ultimate Developer Setup.",
         }),
       },
     ],

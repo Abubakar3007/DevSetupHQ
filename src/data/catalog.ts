@@ -33,6 +33,8 @@ export type Category = {
 };
 
 export type Product = {
+  /** Stable id — maps to a database primary key later. */
+  id: string;
   slug: string;
   name: string;
   categorySlug: string;
@@ -46,8 +48,39 @@ export type Product = {
   cons: string[];
   features: string[];
   specs: { label: string; value: string }[];
+  /** Who the product suits — used for affiliate discovery filters. */
+  bestFor: string[];
+  /** Short summary of who should buy it. */
+  quickVerdict: string;
   /** Placeholder — swap for a real affiliate URL later. */
   affiliateUrl: string;
+  isFeatured: boolean;
+  /** True while this entry is sample data rather than a researched product. */
+  isPlaceholder: boolean;
+};
+
+/** A curated workspace built from several products. */
+export type Setup = {
+  id: string;
+  slug: string;
+  name: string;
+  tagline: string;
+  description: string;
+  image: string;
+  gearCount: number;
+  gearSlugs: string[];
+  highlights: string[];
+  isPlaceholder: boolean;
+};
+
+/** A side-by-side comparison of products. */
+export type Comparison = {
+  id: string;
+  slug: string;
+  title: string;
+  description: string;
+  productSlugs: string[];
+  isPlaceholder: boolean;
 };
 
 export type Article = {
@@ -79,31 +112,42 @@ export const SORT_OPTIONS = [
 ] as const;
 
 export const ARTICLE_CATEGORIES = [
-  "Setup Ideas",
+  "Developer Setup",
+  "Coding Gear",
   "Buying Guides",
   "Productivity",
-  "Developer Tools",
-  "Tech",
+  "Home Office",
+  "Desk Setup",
 ];
 
 export const categories: Category[] = [
   {
     slug: "developer-setup",
     name: "Developer Setup",
-    glyph: "💻",
-    short: "Stands, splits, and peripherals built for long coding sessions.",
+    glyph: "⌨",
+    short: "Keyboards, monitors, laptop stands, mice, and gear designed for coding.",
     description:
-      "Keyboards, monitors, stands and terminals tuned for people who write code all day. Chosen for stability, key feel and how they hold up over a full week of work.",
+      "Keyboards, monitors, laptop stands, mice, and gear designed for coding. Selected for key feel, text clarity and how they hold up across long working days.",
     image: catDeveloper,
     itemCount: 24,
   },
   {
+    slug: "coding-gear",
+    name: "Coding Gear",
+    glyph: "⚡",
+    short: "Essential hardware and accessories for programmers and software developers.",
+    description:
+      "Essential hardware and accessories for programmers and software developers — docks, hubs, cables and the unglamorous pieces that decide whether the rest of a setup works.",
+    image: catTech,
+    itemCount: 27,
+  },
+  {
     slug: "desk-setup",
     name: "Desk Setup",
-    glyph: "🖥️",
-    short: "Surfaces, lighting, and layout that make a desk feel intentional.",
+    glyph: "🖵",
+    short: "Lighting, desk accessories, cable management, and workspace upgrades.",
     description:
-      "Desk mats, risers, cable management and lighting that turn a flat surface into a workspace you actually want to sit at.",
+      "Lighting, desk accessories, cable management, and workspace upgrades that turn a flat surface into a workspace you want to sit at.",
     image: catDesk,
     itemCount: 31,
   },
@@ -111,29 +155,19 @@ export const categories: Category[] = [
     slug: "home-office",
     name: "Home Office",
     glyph: "🏠",
-    short: "Chairs, ergonomics, and calm for working from anywhere.",
+    short: "Ergonomic chairs, productivity tools, and remote work essentials.",
     description:
-      "Seating, acoustics and light for rooms that double as studios. Comfort you notice on the third hour, not the first minute.",
+      "Ergonomic chairs, productivity tools, and remote work essentials for rooms that double as offices — comfort you notice on the third hour, not the first minute.",
     image: catHomeOffice,
     itemCount: 18,
   },
   {
-    slug: "tech-accessories",
-    name: "Tech Accessories",
-    glyph: "⚡",
-    short: "Docks, cables, and the small things that scale up.",
-    description:
-      "Hubs, docks, chargers and cables. Unglamorous gear that quietly decides whether the rest of your setup works.",
-    image: catTech,
-    itemCount: 27,
-  },
-  {
     slug: "productivity-gear",
     name: "Productivity Gear",
-    glyph: "🎧",
-    short: "Focus tools for deep work and quieter afternoons.",
+    glyph: "◎",
+    short: "Tools and accessories that help you focus and work better.",
     description:
-      "Headphones, timers, notebooks and analogue tools that help you protect attention in a noisy house or office.",
+      "Tools and accessories that help you focus and work better — headphones, timers and analogue tools that protect attention in a noisy house or office.",
     image: catProductivity,
     itemCount: 21,
   },
@@ -141,6 +175,7 @@ export const categories: Category[] = [
 
 export const products: Product[] = [
   {
+    id: "aegis-low-profile-keyboard",
     slug: "aegis-low-profile-keyboard",
     name: "Aegis Low-Profile",
     categorySlug: "developer-setup",
@@ -171,8 +206,14 @@ export const products: Product[] = [
       { label: "Weight", value: "820 g" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Programming", "Long Coding Sessions", "Shared Rooms"],
+    quickVerdict:
+      "A strong pick if you type for a living and want a quiet, rigid board that still lets you swap switches later.",
+    isFeatured: true,
+    isPlaceholder: true,
   },
   {
+    id: "twin-rail-stand",
     slug: "twin-rail-stand",
     name: "Twin Rail Stand",
     categorySlug: "developer-setup",
@@ -202,8 +243,14 @@ export const products: Product[] = [
       { label: "Footprint", value: "260 × 210 mm" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Multi-monitor Setup", "Laptop + Monitor Desks", "Ergonomics"],
+    quickVerdict:
+      "Suited to developers running a laptop next to an external display who want both screens at the same eye line.",
+    isFeatured: true,
+    isPlaceholder: true,
   },
   {
+    id: "halo-s1-lamp",
     slug: "halo-s1-lamp",
     name: "Halo S1 Lamp",
     categorySlug: "desk-setup",
@@ -229,8 +276,14 @@ export const products: Product[] = [
       { label: "Power", value: "USB-C, 12 W" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Late Coding Sessions", "Video Calls", "Small Desks"],
+    quickVerdict:
+      "Best for anyone coding into the evening who wants even, flicker-free light without glare on the screen.",
+    isFeatured: false,
+    isPlaceholder: true,
   },
   {
+    id: "cadence-anc-headphones",
     slug: "cadence-anc-headphones",
     name: "Cadence ANC",
     categorySlug: "productivity-gear",
@@ -256,11 +309,17 @@ export const products: Product[] = [
       { label: "Weight", value: "268 g" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Deep Focus", "Remote Work", "Open Offices"],
+    quickVerdict:
+      "A good fit for long focus blocks at home, where household noise matters more than traffic rumble.",
+    isFeatured: true,
+    isPlaceholder: true,
   },
   {
+    id: "portway-8-dock",
     slug: "portway-8-dock",
     name: "Portway 8 Dock",
-    categorySlug: "tech-accessories",
+    categorySlug: "coding-gear",
     tagline: "Eight ports of aluminium that stays cool under load.",
     description:
       "A compact dock with dual display output, 100 W passthrough charging and an aluminium shell that spreads heat instead of trapping it. Handles a monitor, drive and peripherals from one cable.",
@@ -283,8 +342,14 @@ export const products: Product[] = [
       { label: "Shell", value: "Anodised aluminium" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Multi-monitor Setup", "Laptop Docking", "Remote Work"],
+    quickVerdict:
+      "Made for a one-cable desk: dock the laptop, keep two displays and charging on a single connection.",
+    isFeatured: false,
+    isPlaceholder: true,
   },
   {
+    id: "arc-vertical-mouse",
     slug: "arc-vertical-mouse",
     name: "Arc Vertical Mouse",
     categorySlug: "home-office",
@@ -310,8 +375,14 @@ export const products: Product[] = [
       { label: "Weight", value: "112 g" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Long Coding Sessions", "Wrist Comfort", "Remote Work"],
+    quickVerdict:
+      "Worth considering if long mouse days leave your wrist sore and you can accept a short adjustment period.",
+    isFeatured: false,
+    isPlaceholder: true,
   },
   {
+    id: "monolith-desk-mat",
     slug: "monolith-desk-mat",
     name: "Monolith Desk Mat",
     categorySlug: "desk-setup",
@@ -337,8 +408,14 @@ export const products: Product[] = [
       { label: "Base", value: "Natural rubber" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Budget Setup", "Desk Aesthetics", "Quieter Typing"],
+    quickVerdict:
+      "An easy first upgrade: it quiets typing, keeps tracking even and visually defines the desk.",
+    isFeatured: false,
+    isPlaceholder: true,
   },
   {
+    id: "quarry-monitor-light",
     slug: "quarry-monitor-light",
     name: "Quarry Monitor Light",
     categorySlug: "desk-setup",
@@ -364,8 +441,14 @@ export const products: Product[] = [
       { label: "Power", value: "USB-A, 5 W" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Late Coding Sessions", "Small Desks", "Dim Rooms"],
+    quickVerdict:
+      "Best for dim rooms with a bright display, where desk space is too tight for a lamp.",
+    isFeatured: false,
+    isPlaceholder: true,
   },
   {
+    id: "still-hours-timer",
     slug: "still-hours-timer",
     name: "Still Hours Timer",
     categorySlug: "productivity-gear",
@@ -391,8 +474,14 @@ export const products: Product[] = [
       { label: "Body", value: "Aluminium and silicone" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Deep Focus", "Productivity", "Screen-free Breaks"],
+    quickVerdict:
+      "For developers who want a focus timer that is not another app on the machine holding every notification.",
+    isFeatured: false,
+    isPlaceholder: true,
   },
   {
+    id: "meridian-task-chair",
     slug: "meridian-task-chair",
     name: "Meridian Task Chair",
     categorySlug: "home-office",
@@ -418,11 +507,17 @@ export const products: Product[] = [
       { label: "Warranty", value: "12 years" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Long Coding Sessions", "Remote Work", "Ergonomics"],
+    quickVerdict:
+      "Suited to full working days at a desk, if you prefer firm support over a plush seat.",
+    isFeatured: false,
+    isPlaceholder: true,
   },
   {
+    id: "loom-cable-kit",
     slug: "loom-cable-kit",
     name: "Loom Cable Kit",
-    categorySlug: "tech-accessories",
+    categorySlug: "coding-gear",
     tagline: "Under-desk order in about twenty minutes.",
     description:
       "A kit of braided sleeves, adhesive channels and reusable ties, sized for a normal two-monitor desk. It is the cheapest thing on this list that changes how a setup looks.",
@@ -445,8 +540,14 @@ export const products: Product[] = [
       { label: "Tray", value: "Steel, 400 mm" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Budget Setup", "Desk Aesthetics", "Cable Management"],
+    quickVerdict:
+      "The cheapest change here that visibly improves a desk, and it takes about twenty minutes.",
+    isFeatured: false,
+    isPlaceholder: true,
   },
   {
+    id: "atlas-27-monitor",
     slug: "atlas-27-monitor",
     name: "Atlas 27 Monitor",
     categorySlug: "developer-setup",
@@ -472,6 +573,11 @@ export const products: Product[] = [
       { label: "Inputs", value: "USB-C 90 W, 2× HDMI, DP" },
     ],
     affiliateUrl: "#affiliate-link-placeholder",
+    bestFor: ["Programming", "Multi-monitor Setup", "Text Clarity"],
+    quickVerdict:
+      "Choose it for code legibility: crisp text at 100% scaling is the reason to skip a cheaper 1440p panel.",
+    isFeatured: true,
+    isPlaceholder: true,
   },
 ];
 
@@ -479,11 +585,11 @@ export const articles: Article[] = [
   {
     slug: "best-desk-accessories-productive-workspace",
     title: "10 Best Desk Accessories for a More Productive Workspace",
-    category: "Setup Ideas",
+    category: "Desk Setup",
     excerpt:
-      "The small additions that change how a desk feels to work at — ranked by how often we still reach for them a year later.",
+      "The small additions that change how a desk feels to work at — compared on specifications, features and user feedback rather than first impressions.",
     cover: aDeskAccessories,
-    author: "SetupForge Editorial",
+    author: "DevSetupHQ Editorial",
     publishedAt: "2026-08-14",
     readingTime: "9 min read",
     sections: [
@@ -492,14 +598,14 @@ export const articles: Article[] = [
         heading: "Why accessories matter more than furniture",
         body: [
           "A desk is mostly a flat surface. What decides whether you enjoy sitting at it is the layer on top: where light falls, how cables run, whether your wrists rest at a sane angle. Those are accessory problems, and they are far cheaper to fix than a new desk.",
-          "We spent a year rotating gear across four working setups — a shared living room, a small home office, a studio desk and a standing desk — and kept notes on what stayed in place. This list is the gear that survived.",
+          "Our guide compares popular options based on product specifications, features, user feedback, and research, so you can see which upgrades matter most before spending anything.",
         ],
       },
       {
         id: "start-with-light",
         heading: "Start with light, not gadgets",
         body: [
-          "Almost every uncomfortable desk we tested was under-lit. A bright screen in a dim room forces your eyes to keep adjusting, which reads as fatigue by mid-afternoon.",
+          "Almost every uncomfortable desk we researched was under-lit. A bright screen in a dim room forces your eyes to keep adjusting, which reads as fatigue by mid-afternoon.",
           "An asymmetric monitor light or a diffused desk lamp fixes it for less than the cost of a keyboard. Look for a high CRI rating and a dimmer that goes genuinely low, so the same lamp works at 9am and 9pm.",
         ],
       },
@@ -534,11 +640,11 @@ export const articles: Article[] = [
   {
     slug: "best-laptop-stands-for-developers",
     title: "Best Laptop Stands for Developers",
-    category: "Developer Tools",
+    category: "Developer Setup",
     excerpt:
-      "We tested 14 stands for stability, angle, and how they sit in a real split-screen workflow.",
+      "Our guide compares popular options based on product specifications, features, user feedback, and research.",
     cover: aLaptopStands,
-    author: "SetupForge Editorial",
+    author: "DevSetupHQ Editorial",
     publishedAt: "2026-07-29",
     readingTime: "7 min read",
     sections: [
@@ -577,7 +683,7 @@ export const articles: Article[] = [
     excerpt:
       "A step-by-step plan, from cable routing to the last matte mat, for a desk you'll actually use.",
     cover: aHomeOffice,
-    author: "SetupForge Editorial",
+    author: "DevSetupHQ Editorial",
     publishedAt: "2026-07-02",
     readingTime: "12 min read",
     sections: [
@@ -618,11 +724,11 @@ export const articles: Article[] = [
   {
     slug: "best-keyboards-for-programming",
     title: "Best Keyboards for Programming",
-    category: "Developer Tools",
+    category: "Developer Setup",
     excerpt:
       "Layouts, switch feel and noise levels — what to buy when you type for a living and share a room.",
     cover: aKeyboards,
-    author: "SetupForge Editorial",
+    author: "DevSetupHQ Editorial",
     publishedAt: "2026-06-18",
     readingTime: "8 min read",
     sections: [
@@ -657,9 +763,9 @@ export const articles: Article[] = [
     title: "Focus Tools That Aren't Another App",
     category: "Productivity",
     excerpt:
-      "Physical timers, paper and headphones — the low-tech kit that held up across a year of deep work.",
+      "Physical timers, paper and headphones — the low-tech kit worth considering for deep work.",
     cover: catProductivity,
-    author: "SetupForge Editorial",
+    author: "DevSetupHQ Editorial",
     publishedAt: "2026-05-30",
     readingTime: "6 min read",
     sections: [
@@ -685,11 +791,11 @@ export const articles: Article[] = [
   {
     slug: "one-cable-desk-docks",
     title: "The One-Cable Desk: Docks Worth Buying",
-    category: "Tech",
+    category: "Coding Gear",
     excerpt:
       "What to look for in a dock so a laptop connects to everything with a single plug — and stays cool doing it.",
     cover: catTech,
-    author: "SetupForge Editorial",
+    author: "DevSetupHQ Editorial",
     publishedAt: "2026-05-11",
     readingTime: "7 min read",
     sections: [
@@ -719,6 +825,111 @@ export const articles: Article[] = [
     pros: ["One cable to leave and return", "Cleans up the desk surface"],
     cons: ["Good docks cost real money", "Port layouts vary widely"],
   },
+  {
+    slug: "best-monitors-for-coding",
+    title: "Best Monitors for Coding",
+    category: "Buying Guides",
+    excerpt:
+      "Resolution, panel coating and scaling — what actually makes code easier to read for eight hours.",
+    cover: catDesk,
+    author: "DevSetupHQ Editorial",
+    publishedAt: "2026-08-02",
+    readingTime: "8 min read",
+    sections: [
+      {
+        id: "resolution-and-scaling",
+        heading: "Resolution matters less than scaling",
+        body: [
+          "A 27-inch 4K panel at 100% scaling renders code far more crisply than a 1440p panel of the same size. If you plan to scale the display anyway, spend the difference elsewhere.",
+          "Our guide compares popular options based on product specifications, features, user feedback, and research.",
+        ],
+      },
+      {
+        id: "coating",
+        heading: "Matte coating beats brightness claims",
+        body: [
+          "Glossy panels look better in a shop and worse in a room with a window. A matte anti-glare coating removes the reflections that cause most end-of-day eye strain.",
+        ],
+      },
+      {
+        id: "stand-and-ports",
+        heading: "Check the stand and the ports",
+        body: [
+          "Height and pivot adjustment decide whether the screen ever reaches eye level, and a USB-C input with charging removes a cable from the desk entirely.",
+        ],
+      },
+    ],
+    recommendedProducts: ["atlas-27-monitor", "twin-rail-stand", "portway-8-dock"],
+    pros: ["Sharper text reduces eye strain", "USB-C models simplify the desk"],
+    cons: ["4K panels cost more", "Higher refresh rates are rare at this resolution"],
+  },
+  {
+    slug: "mechanical-vs-membrane-keyboard-programming",
+    title: "Mechanical vs Membrane Keyboard for Programming",
+    category: "Coding Gear",
+    excerpt:
+      "Two very different typing experiences, compared on feel, noise, longevity and price.",
+    cover: aKeyboards,
+    author: "DevSetupHQ Editorial",
+    publishedAt: "2026-07-12",
+    readingTime: "6 min read",
+    sections: [
+      {
+        id: "feel",
+        heading: "Feel and feedback",
+        body: [
+          "Mechanical switches give a defined actuation point, which many developers find reduces typing errors. Membrane boards feel softer and quieter but muddier at speed.",
+        ],
+      },
+      {
+        id: "noise",
+        heading: "Noise, and who else is in the room",
+        body: [
+          "If you share a room or take calls all day, a low-profile tactile mechanical or a quality membrane board is the practical choice. Clicky switches rarely survive a shared office.",
+        ],
+      },
+      {
+        id: "cost",
+        heading: "Cost over time",
+        body: [
+          "Mechanical boards cost more up front but hot-swap sockets and replaceable keycaps make them repairable. Membrane boards are cheaper and generally replaced rather than fixed.",
+        ],
+      },
+    ],
+    recommendedProducts: ["aegis-low-profile-keyboard", "monolith-desk-mat", "arc-vertical-mouse"],
+    pros: ["Clear criteria for choosing between the two", "Covers shared-room noise levels"],
+    cons: ["Switch preference is personal", "Feel is hard to judge without trying one"],
+  },
+  {
+    slug: "best-budget-setup-for-programmers",
+    title: "Best Budget Setup for Programmers",
+    category: "Developer Setup",
+    excerpt:
+      "The order to buy in when the budget is small — the changes that pay off before furniture does.",
+    cover: catDeveloper,
+    author: "DevSetupHQ Editorial",
+    publishedAt: "2026-06-30",
+    readingTime: "7 min read",
+    sections: [
+      {
+        id: "order-of-spend",
+        heading: "Buy in this order",
+        body: [
+          "Screen height first, then light, then the typing surface, then cables. Each step costs little and changes how the desk feels immediately.",
+        ],
+      },
+      {
+        id: "what-to-skip",
+        heading: "What to skip at first",
+        body: [
+          "A second monitor and an expensive chair can wait. A stand that lifts the laptop and a lamp that fills the desk do more for a small budget.",
+        ],
+      },
+    ],
+    recommendedProducts: ["twin-rail-stand", "monolith-desk-mat", "loom-cable-kit"],
+    pros: ["Every step is under the cost of a monitor", "Changes are reversible"],
+    cons: ["Does not replace a proper chair", "Compromises on screen space"],
+  },
 ];
 
 export const getCategory = (slug: string) => categories.find((c) => c.slug === slug);
@@ -731,3 +942,94 @@ export const productsByCategory = (slug: string) =>
 
 export const relatedArticles = (slug: string, limit = 3) =>
   articles.filter((a) => a.slug !== slug).slice(0, limit);
+
+/**
+ * Curated setups. Placeholder data for now — the shape mirrors the future
+ * database table so a Supabase query can replace this array directly.
+ */
+export const setups: Setup[] = [
+  {
+    id: "minimal-coding-setup",
+    slug: "minimal-coding-setup",
+    name: "Minimal Coding Setup",
+    tagline: "One screen, one board, nothing else on the desk.",
+    description:
+      "A single-display desk built for focus: a compact keyboard, a 4K panel at eye level and light that lands on the desk instead of the screen. Ideal for small rooms and deep work.",
+    image: catDeveloper,
+    gearCount: 5,
+    gearSlugs: ["aegis-low-profile-keyboard", "atlas-27-monitor", "quarry-monitor-light", "monolith-desk-mat", "loom-cable-kit"],
+    highlights: ["Single 4K display at eye level", "Compact 65% keyboard", "Cables fully routed out of sight"],
+    isPlaceholder: true,
+  },
+  {
+    id: "dual-monitor-developer-setup",
+    slug: "dual-monitor-developer-setup",
+    name: "Dual Monitor Developer Setup",
+    tagline: "Code on one screen, docs and terminal on the other.",
+    description:
+      "A two-display workspace for people who live in a split workflow. A rigid riser lines the screens up, and a single dock keeps the laptop connected with one cable.",
+    image: catDesk,
+    gearCount: 6,
+    gearSlugs: ["atlas-27-monitor", "twin-rail-stand", "portway-8-dock", "aegis-low-profile-keyboard", "arc-vertical-mouse", "loom-cable-kit"],
+    highlights: ["Matched eye line across both screens", "One-cable docking", "Room for a reference window"],
+    isPlaceholder: true,
+  },
+  {
+    id: "budget-developer-setup",
+    slug: "budget-developer-setup",
+    name: "Budget Developer Setup",
+    tagline: "The upgrades that matter first, before the expensive ones.",
+    description:
+      "A starter desk that fixes posture, light and cables before spending on furniture. Every piece here is the cheapest change with a visible daily difference.",
+    image: catHomeOffice,
+    gearCount: 4,
+    gearSlugs: ["twin-rail-stand", "monolith-desk-mat", "loom-cable-kit", "still-hours-timer"],
+    highlights: ["Laptop lifted to eye level", "Quieter typing surface", "Tidy cable runs under the desk"],
+    isPlaceholder: true,
+  },
+];
+
+/** Placeholder comparison sets for the /compare page. */
+export const comparisons: Comparison[] = [
+  {
+    id: "coding-keyboards",
+    slug: "coding-keyboards",
+    title: "Keyboards & input for programming",
+    description:
+      "Compare typing gear on layout, feel and comfort across long coding sessions.",
+    productSlugs: ["aegis-low-profile-keyboard", "arc-vertical-mouse", "monolith-desk-mat"],
+    isPlaceholder: true,
+  },
+  {
+    id: "developer-displays",
+    slug: "developer-displays",
+    title: "Displays, stands & docking",
+    description: "Compare the pieces that decide how many screens a desk can carry.",
+    productSlugs: ["atlas-27-monitor", "twin-rail-stand", "portway-8-dock"],
+    isPlaceholder: true,
+  },
+  {
+    id: "focus-and-comfort",
+    slug: "focus-and-comfort",
+    title: "Focus & comfort",
+    description: "Compare gear aimed at attention, seating and long working days.",
+    productSlugs: ["cadence-anc-headphones", "meridian-task-chair", "still-hours-timer"],
+    isPlaceholder: true,
+  },
+];
+
+export const getSetup = (slug: string) => setups.find((s) => s.slug === slug);
+export const getComparison = (slug: string) => comparisons.find((c) => c.slug === slug);
+export const productsBySlugs = (slugs: string[]) =>
+  slugs.map((slug) => getProduct(slug)).filter((p): p is Product => Boolean(p));
+export const featuredProducts = (limit = 4) =>
+  products.filter((p) => p.isFeatured).slice(0, limit);
+export const alternativeProducts = (slug: string, limit = 3) => {
+  const product = getProduct(slug);
+  if (!product) return [];
+  const sameCategory = products.filter(
+    (p) => p.slug !== slug && p.categorySlug === product.categorySlug,
+  );
+  const others = products.filter((p) => p.slug !== slug && p.categorySlug !== product.categorySlug);
+  return [...sameCategory, ...others].slice(0, limit);
+};

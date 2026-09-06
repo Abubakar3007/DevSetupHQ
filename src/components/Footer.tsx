@@ -3,9 +3,11 @@ import { Logo } from "./Navbar";
 
 const explore = [
   { to: "/", label: "Home" },
+  { to: "/setups", label: "Setups" },
+  { to: "/products", label: "Gear" },
   { to: "/categories", label: "Categories" },
-  { to: "/products", label: "Products" },
   { to: "/guides", label: "Guides" },
+  { to: "/compare", label: "Compare" },
 ] as const;
 
 const company = [
@@ -27,7 +29,7 @@ export function Footer() {
           <div className="md:col-span-4">
             <Logo size="text-base" />
             <p className="mt-3 font-sans text-sm text-brand/60 leading-relaxed max-w-[30ch]">
-              Build a Better Setup. Carefully researched products for the way you work.
+              Build Your Ultimate Developer Setup. Carefully researched products for the way you work.
             </p>
             <div className="mt-5 flex gap-4 font-mono text-[11px] uppercase tracking-[0.12em] text-brand/50">
               <a href="#" className="transition-colors hover:text-accent">
@@ -67,10 +69,10 @@ export function Footer() {
               ))}
               <li>
                 <a
-                  href="mailto:support@setupforge.com"
+                  href="mailto:support@devsetuphq.com"
                   className="transition-colors hover:text-accent"
                 >
-                  support@setupforge.com
+                  support@devsetuphq.com
                 </a>
               </li>
             </ul>
@@ -92,7 +94,7 @@ export function Footer() {
 
         <div className="mt-12 pt-6 border-t border-brand/10 flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
           <p className="font-mono text-[11px] text-brand/40">
-            © {new Date().getFullYear()} SetupForge. All rights reserved.
+            © 2026 DevSetupHQ. All rights reserved.
           </p>
           <p className="font-mono text-[10px] text-brand/35 max-w-[46ch] leading-relaxed">
             We may earn a commission on purchases made through links on this site, at no extra cost

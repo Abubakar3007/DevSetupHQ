@@ -1,6 +1,6 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 
-import { categoryName, getProduct, products } from "@/data/catalog";
+import { alternativeProducts, categoryName, getProduct } from "@/data/catalog";
 import { ProductCard } from "@/components/ProductCard";
 import { AffiliateDisclosure, Rating } from "@/components/ui-bits";
 
@@ -13,21 +13,29 @@ export const Route = createFileRoute("/products/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Product not found — SetupForge" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Product not found — DevSetupHQ" }, { name: "robots", content: "noindex" }],
       };
     }
     const { product } = loaderData;
     const description = `${product.tagline} Read our review of the ${product.name}, including pros, cons and specifications.`;
     return {
       meta: [
-        { title: `${product.name} Review — SetupForge` },
+        { title: `${product.name} Review — DevSetupHQ` },
         { name: "description", content: description },
-        { property: "og:title", content: `${product.name} Review — SetupForge` },
+        { property: "og:title", content: `${product.name} Review — DevSetupHQ` },
         { property: "og:description", content: description },
         { property: "og:type", content: "product" },
-        { property: "og:url", content: `/products/${product.slug}` },
+        {
+          property: "og:url",
+          content: `https://gear-discovery-pro.lovable.app/products/${product.slug}`,
+        },
       ],
-      links: [{ rel: "canonical", href: `/products/${product.slug}` }],
+      links: [
+        {
+          rel: "canonical",
+          href: `https://gear-discovery-pro.lovable.app/products/${product.slug}`,
+        },
+      ],
       scripts: [
         {
           type: "application/ld+json",
@@ -37,12 +45,6 @@ export const Route = createFileRoute("/products/$slug")({
             name: product.name,
             description: product.description,
             category: categoryName(product.categorySlug),
-            aggregateRating: {
-              "@type": "AggregateRating",
-              ratingValue: product.rating,
-              bestRating: 5,
-              ratingCount: 128,
-            },
           }),
         },
       ],
@@ -53,9 +55,7 @@ export const Route = createFileRoute("/products/$slug")({
 
 function ProductDetail() {
   const { product } = Route.useLoaderData();
-  const related = products
-    .filter((p) => p.slug !== product.slug && p.categorySlug === product.categorySlug)
-    .slice(0, 3);
+  const related = alternativeProducts(product.slug, 3);
 
   return (
     <>
@@ -86,6 +86,11 @@ function ProductDetail() {
                   {categoryName(product.categorySlug)}
                 </span>
                 <Rating value={product.rating} />
+                {product.isPlaceholder && (
+                  <span className="font-mono text-[9px] uppercase tracking-[0.15em] text-brand/55 border border-brand/15 rounded px-2 py-1">
+                    Sample product
+                  </span>
+                )}
               </div>
               <h1 className="mt-4 font-display text-4xl sm:text-5xl leading-[1.05] text-brand text-balance">
                 {product.name}
@@ -97,19 +102,45 @@ function ProductDetail() {
                 {product.description}
               </p>
 
-              <div className="mt-6 flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.12em] text-brand/60">
-                <span className="border border-brand/15 rounded px-3 py-1.5">
-                  {product.priceLabel}
-                </span>
+              <div className="mt-6">
+                <div className="eyebrow">Best for</div>
+                <ul className="mt-2 flex flex-wrap gap-1.5">
+                  {product.bestFor.map((b) => (
+                    <li
+                      key={b}
+                      className="font-mono text-[10px] uppercase tracking-[0.12em] text-brand/65 bg-white rounded px-2.5 py-1.5"
+                    >
+                      {b}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              <a
-                href={product.affiliateUrl}
-                rel="nofollow sponsored noopener"
-                className="mt-8 inline-flex items-center gap-3 bg-accent text-white font-sans text-sm px-6 py-3.5 rounded-[8px] ring-1 ring-inset ring-accent/40 transition-colors hover:bg-brand"
-              >
-                Check Latest Price <span className="font-mono text-xs">→</span>
-              </a>
+              <div className="mt-6 rounded-[10px] border border-brand/10 bg-white p-5">
+                <div className="eyebrow">Quick verdict</div>
+                <p className="mt-2 font-sans text-sm text-brand/70 leading-relaxed">
+                  {product.quickVerdict}
+                </p>
+                <div className="mt-3 font-mono text-[10px] uppercase tracking-[0.12em] text-steel">
+                  Indicative price range: {product.priceLabel}
+                </div>
+              </div>
+
+              <div className="mt-8 flex flex-wrap items-center gap-4">
+                <a
+                  href={product.affiliateUrl}
+                  rel="nofollow sponsored noopener"
+                  className="inline-flex items-center gap-3 bg-accent text-white font-sans text-sm px-6 py-3.5 rounded-[8px] ring-1 ring-inset ring-accent/40 transition-colors hover:bg-brand"
+                >
+                  Check Latest Availability <span className="font-mono text-xs">→</span>
+                </a>
+                <Link
+                  to="/compare"
+                  className="inline-flex items-center font-sans text-sm px-6 py-3.5 rounded-[8px] border border-brand/20 text-brand transition-colors hover:border-brand"
+                >
+                  Compare with Similar Products
+                </Link>
+              </div>
 
               <div className="mt-6">
                 <AffiliateDisclosure />
@@ -185,7 +216,10 @@ function ProductDetail() {
       {related.length > 0 && (
         <section className="bg-paper border-t border-brand/10">
           <div className="shell py-16">
-            <span className="eyebrow">Also in {categoryName(product.categorySlug)}</span>
+            <span className="eyebrow">Alternatives worth considering</span>
+            <h2 className="mt-3 font-display text-2xl text-brand">
+              Other options in {categoryName(product.categorySlug)}
+            </h2>
             <div className="mt-6 grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
               {related.map((p) => (
                 <ProductCard key={p.slug} product={p} cta="View Details" />

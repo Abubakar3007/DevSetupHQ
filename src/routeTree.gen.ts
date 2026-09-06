@@ -12,14 +12,18 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as AffiliateDisclosureRouteImport } from './routes/affiliate-disclosure'
-import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as CompareRouteImport } from './routes/compare'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as PrivacyPolicyRouteImport } from './routes/privacy-policy'
 import { Route as TermsOfServiceRouteImport } from './routes/terms-of-service'
+import { Route as CategoriesIndexRouteImport } from './routes/categories.index'
+import { Route as CategoriesSlugRouteImport } from './routes/categories.$slug'
 import { Route as GuidesIndexRouteImport } from './routes/guides.index'
 import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
+import { Route as SetupsIndexRouteImport } from './routes/setups.index'
+import { Route as SetupsSlugRouteImport } from './routes/setups.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -36,9 +40,9 @@ const AffiliateDisclosureRoute = AffiliateDisclosureRouteImport.update({
   path: '/affiliate-disclosure',
   getParentRoute: () => rootRouteImport,
 } as any)
-const CategoriesRoute = CategoriesRouteImport.update({
-  id: '/categories',
-  path: '/categories',
+const CompareRoute = CompareRouteImport.update({
+  id: '/compare',
+  path: '/compare',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -54,6 +58,16 @@ const PrivacyPolicyRoute = PrivacyPolicyRouteImport.update({
 const TermsOfServiceRoute = TermsOfServiceRouteImport.update({
   id: '/terms-of-service',
   path: '/terms-of-service',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesIndexRoute = CategoriesIndexRouteImport.update({
+  id: '/categories/',
+  path: '/categories/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CategoriesSlugRoute = CategoriesSlugRouteImport.update({
+  id: '/categories/$slug',
+  path: '/categories/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const GuidesIndexRoute = GuidesIndexRouteImport.update({
@@ -76,46 +90,68 @@ const ProductsSlugRoute = ProductsSlugRouteImport.update({
   path: '/products/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SetupsIndexRoute = SetupsIndexRouteImport.update({
+  id: '/setups/',
+  path: '/setups/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SetupsSlugRoute = SetupsSlugRouteImport.update({
+  id: '/setups/$slug',
+  path: '/setups/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/affiliate-disclosure': typeof AffiliateDisclosureRoute
-  '/categories': typeof CategoriesRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/categories/$slug': typeof CategoriesSlugRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/setups/$slug': typeof SetupsSlugRoute
+  '/categories/': typeof CategoriesIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/setups/': typeof SetupsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/affiliate-disclosure': typeof AffiliateDisclosureRoute
-  '/categories': typeof CategoriesRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/categories/$slug': typeof CategoriesSlugRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/setups/$slug': typeof SetupsSlugRoute
+  '/categories': typeof CategoriesIndexRoute
   '/guides': typeof GuidesIndexRoute
   '/products': typeof ProductsIndexRoute
+  '/setups': typeof SetupsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/affiliate-disclosure': typeof AffiliateDisclosureRoute
-  '/categories': typeof CategoriesRoute
+  '/compare': typeof CompareRoute
   '/contact': typeof ContactRoute
   '/privacy-policy': typeof PrivacyPolicyRoute
   '/terms-of-service': typeof TermsOfServiceRoute
+  '/categories/$slug': typeof CategoriesSlugRoute
   '/guides/$slug': typeof GuidesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/setups/$slug': typeof SetupsSlugRoute
+  '/categories/': typeof CategoriesIndexRoute
   '/guides/': typeof GuidesIndexRoute
   '/products/': typeof ProductsIndexRoute
+  '/setups/': typeof SetupsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -123,54 +159,70 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/affiliate-disclosure'
-    | '/categories'
+    | '/compare'
     | '/contact'
     | '/privacy-policy'
     | '/terms-of-service'
+    | '/categories/$slug'
     | '/guides/$slug'
     | '/products/$slug'
+    | '/setups/$slug'
+    | '/categories/'
     | '/guides/'
     | '/products/'
+    | '/setups/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
     | '/about'
     | '/affiliate-disclosure'
-    | '/categories'
+    | '/compare'
     | '/contact'
     | '/privacy-policy'
     | '/terms-of-service'
+    | '/categories/$slug'
     | '/guides/$slug'
     | '/products/$slug'
+    | '/setups/$slug'
+    | '/categories'
     | '/guides'
     | '/products'
+    | '/setups'
   id:
     | '__root__'
     | '/'
     | '/about'
     | '/affiliate-disclosure'
-    | '/categories'
+    | '/compare'
     | '/contact'
     | '/privacy-policy'
     | '/terms-of-service'
+    | '/categories/$slug'
     | '/guides/$slug'
     | '/products/$slug'
+    | '/setups/$slug'
+    | '/categories/'
     | '/guides/'
     | '/products/'
+    | '/setups/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   AffiliateDisclosureRoute: typeof AffiliateDisclosureRoute
-  CategoriesRoute: typeof CategoriesRoute
+  CompareRoute: typeof CompareRoute
   ContactRoute: typeof ContactRoute
   PrivacyPolicyRoute: typeof PrivacyPolicyRoute
   TermsOfServiceRoute: typeof TermsOfServiceRoute
+  CategoriesSlugRoute: typeof CategoriesSlugRoute
   GuidesSlugRoute: typeof GuidesSlugRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
+  SetupsSlugRoute: typeof SetupsSlugRoute
+  CategoriesIndexRoute: typeof CategoriesIndexRoute
   GuidesIndexRoute: typeof GuidesIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
+  SetupsIndexRoute: typeof SetupsIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -196,11 +248,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AffiliateDisclosureRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/categories': {
-      id: '/categories'
-      path: '/categories'
-      fullPath: '/categories'
-      preLoaderRoute: typeof CategoriesRouteImport
+    '/compare': {
+      id: '/compare'
+      path: '/compare'
+      fullPath: '/compare'
+      preLoaderRoute: typeof CompareRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -222,6 +274,20 @@ declare module '@tanstack/react-router' {
       path: '/terms-of-service'
       fullPath: '/terms-of-service'
       preLoaderRoute: typeof TermsOfServiceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/': {
+      id: '/categories/'
+      path: '/categories'
+      fullPath: '/categories/'
+      preLoaderRoute: typeof CategoriesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/categories/$slug': {
+      id: '/categories/$slug'
+      path: '/categories/$slug'
+      fullPath: '/categories/$slug'
+      preLoaderRoute: typeof CategoriesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/guides/': {
@@ -252,6 +318,20 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ProductsSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/setups/': {
+      id: '/setups/'
+      path: '/setups'
+      fullPath: '/setups/'
+      preLoaderRoute: typeof SetupsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/setups/$slug': {
+      id: '/setups/$slug'
+      path: '/setups/$slug'
+      fullPath: '/setups/$slug'
+      preLoaderRoute: typeof SetupsSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -259,14 +339,18 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   AffiliateDisclosureRoute: AffiliateDisclosureRoute,
-  CategoriesRoute: CategoriesRoute,
+  CompareRoute: CompareRoute,
   ContactRoute: ContactRoute,
   PrivacyPolicyRoute: PrivacyPolicyRoute,
   TermsOfServiceRoute: TermsOfServiceRoute,
+  CategoriesSlugRoute: CategoriesSlugRoute,
   GuidesSlugRoute: GuidesSlugRoute,
   ProductsSlugRoute: ProductsSlugRoute,
+  SetupsSlugRoute: SetupsSlugRoute,
+  CategoriesIndexRoute: CategoriesIndexRoute,
   GuidesIndexRoute: GuidesIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
+  SetupsIndexRoute: SetupsIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

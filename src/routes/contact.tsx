@@ -6,21 +6,21 @@ import { PageHeader } from "@/components/ui-bits";
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
-      { title: "Contact SetupForge" },
+      { title: "Contact DevSetupHQ" },
       {
         name: "description",
         content:
-          "Questions, product suggestions or partnership enquiries? Send the SetupForge team a message or email support@setupforge.com.",
+          "Questions, product suggestions or partnership enquiries? Send the DevSetupHQ team a message or email support@devsetuphq.com.",
       },
-      { property: "og:title", content: "Contact SetupForge" },
+      { property: "og:title", content: "Contact DevSetupHQ" },
       {
         property: "og:description",
-        content: "Send the SetupForge team a message or email support@setupforge.com.",
+        content: "Send the DevSetupHQ team a message or email support@devsetuphq.com.",
       },
       { property: "og:type", content: "website" },
-      { property: "og:url", content: "/contact" },
+      { property: "og:url", content: "https://gear-discovery-pro.lovable.app/contact" },
     ],
-    links: [{ rel: "canonical", href: "/contact" }],
+    links: [{ rel: "canonical", href: "https://gear-discovery-pro.lovable.app/contact" }],
   }),
   component: ContactPage,
 });
@@ -36,7 +36,7 @@ function ContactPage() {
     <>
       <PageHeader
         eyebrow="Contact"
-        title="Tell us what to test next"
+        title="Tell us what to research next"
         intro="Product suggestions, corrections, or questions about a guide — we read everything that comes in."
       />
 
@@ -48,7 +48,7 @@ function ContactPage() {
                 <div className="bg-paper rounded-[10px] ring-1 ring-black/5 p-8">
                   <h2 className="font-display text-2xl text-brand">Message received</h2>
                   <p className="mt-3 font-sans text-sm text-brand/65 leading-relaxed">
-                    Thanks — we'll reply from support@setupforge.com, usually within two working
+                    Thanks — we'll reply from support@devsetuphq.com, usually within two working
                     days.
                   </p>
                   <button
@@ -134,10 +134,10 @@ function ContactPage() {
                 <span className="eyebrow">Email</span>
                 <p className="mt-3 font-display text-xl text-brand">
                   <a
-                    href="mailto:support@setupforge.com"
+                    href="mailto:support@devsetuphq.com"
                     className="transition-colors hover:text-accent"
                   >
-                    support@setupforge.com
+                    support@devsetuphq.com
                   </a>
                 </p>
                 <p className="mt-3 font-sans text-sm text-brand/60 leading-relaxed">

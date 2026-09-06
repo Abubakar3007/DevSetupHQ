@@ -14,20 +14,20 @@ export const Route = createFileRoute("/guides/$slug")({
   head: ({ loaderData }) => {
     if (!loaderData) {
       return {
-        meta: [{ title: "Guide not found — SetupForge" }, { name: "robots", content: "noindex" }],
+        meta: [{ title: "Guide not found — DevSetupHQ" }, { name: "robots", content: "noindex" }],
       };
     }
     const { article } = loaderData;
     return {
       meta: [
-        { title: `${article.title} — SetupForge` },
+        { title: `${article.title} — DevSetupHQ` },
         { name: "description", content: article.excerpt },
-        { property: "og:title", content: `${article.title} — SetupForge` },
+        { property: "og:title", content: `${article.title} — DevSetupHQ` },
         { property: "og:description", content: article.excerpt },
         { property: "og:type", content: "article" },
-        { property: "og:url", content: `/guides/${article.slug}` },
+        { property: "og:url", content: `https://gear-discovery-pro.lovable.app/guides/${article.slug}` },
       ],
-      links: [{ rel: "canonical", href: `/guides/${article.slug}` }],
+      links: [{ rel: "canonical", href: `https://gear-discovery-pro.lovable.app/guides/${article.slug}` }],
       scripts: [
         {
           type: "application/ld+json",

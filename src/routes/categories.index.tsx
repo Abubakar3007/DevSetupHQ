@@ -3,20 +3,20 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { categories } from "@/data/catalog";
 import { PageHeader } from "@/components/ui-bits";
 
-export const Route = createFileRoute("/categories")({
+export const Route = createFileRoute("/categories/")({
   head: () => ({
     meta: [
-      { title: "Setup Categories — SetupForge" },
+      { title: "Developer Gear Categories — DevSetupHQ" },
       {
         name: "description",
         content:
-          "Browse developer setups, desk setups, home office, tech accessories and productivity gear, category by category.",
+          "Browse developer setups, coding gear, desk setups, home office and productivity gear, category by category.",
       },
-      { property: "og:title", content: "Setup Categories — SetupForge" },
+      { property: "og:title", content: "Developer Gear Categories — DevSetupHQ" },
       {
         property: "og:description",
         content:
-          "Browse developer setups, desk setups, home office, tech accessories and productivity gear.",
+          "Browse developer setups, coding gear, desk setups, home office and productivity gear.",
       },
       { property: "og:type", content: "website" },
       { property: "og:url", content: "/categories" },
@@ -31,7 +31,7 @@ function CategoriesPage() {
     <>
       <PageHeader
         eyebrow="01 — Explore"
-        title="Every setup, sorted"
+        title="Developer Gear Categories"
         intro="Five categories covering the gear that actually changes how a workspace feels. Start where your current setup annoys you most."
       />
 
