@@ -36,7 +36,7 @@ function ContactPage() {
     <>
       <PageHeader
         eyebrow="Contact"
-        title="Tell us what to test next"
+        title="Tell us what to research next"
         intro="Product suggestions, corrections, or questions about a guide — we read everything that comes in."
       />
 

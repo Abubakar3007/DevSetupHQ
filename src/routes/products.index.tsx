@@ -64,7 +64,7 @@ function ProductsPage() {
     <>
       <PageHeader
         eyebrow="02 — Products"
-        title="The product index"
+        title="Developer Gear Index"
         intro="Everything we currently recommend, in one place. Filter by category and price, or search for the piece you're missing."
       />
 
