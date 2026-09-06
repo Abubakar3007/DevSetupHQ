@@ -3,7 +3,7 @@ import { createFileRoute, Link } from "@tanstack/react-router";
 import { categories } from "@/data/catalog";
 import { PageHeader } from "@/components/ui-bits";
 
-export const Route = createFileRoute("/categories")({
+export const Route = createFileRoute("/categories/")({
   head: () => ({
     meta: [
       { title: "Setup Categories — SetupForge" },

@@ -31,7 +31,7 @@ const principles = [
   {
     n: "01",
     title: "Research before opinion",
-    body: "We start from how a product behaves over weeks of ordinary use, not a first-impression unboxing.",
+    body: "We start from specifications, features, expert reviews and real user feedback rather than a first-impression unboxing.",
   },
   {
     n: "02",
@@ -50,8 +50,8 @@ function AboutPage() {
     <>
       <PageHeader
         eyebrow="About"
-        title="We make workspace research boringly simple"
-        intro="DevSetupHQ helps people build better workspaces by discovering useful technology, desk accessories and productivity products."
+        title="Developer workspace research, made simple"
+        intro="DevSetupHQ helps developers, programmers and tech professionals discover the gear, desk setups and productivity tools that make a workspace genuinely better."
       />
 
       <section className="bg-white">
@@ -70,8 +70,8 @@ function AboutPage() {
               </p>
               <p className="mt-5 font-sans text-base text-brand/65 leading-[1.75]">
                 Every recommendation on DevSetupHQ is written for people who work at a desk for a
-                living: developers, designers, writers, analysts, and anyone whose home office also
-                has to be a living room.
+                living: developers, programmers, software engineers, remote workers and anyone
+                whose home office also has to be a living room.
               </p>
 
               <div className="mt-12 divide-y divide-brand/10">
@@ -93,7 +93,7 @@ function AboutPage() {
                   to="/products"
                   className="inline-flex items-center gap-3 bg-accent text-white font-sans text-sm px-6 py-3.5 rounded-[8px] ring-1 ring-inset ring-accent/40 transition-colors hover:bg-brand"
                 >
-                  Browse Products <span className="font-mono text-xs">→</span>
+                  Browse Gear <span className="font-mono text-xs">→</span>
                 </Link>
                 <Link
                   to="/contact"
@@ -126,10 +126,10 @@ function AboutPage() {
                 Newsletter
               </span>
               <h2 className="mt-3 font-display text-3xl md:text-4xl text-balance max-w-[30ch]">
-                Upgrade Your Setup
+                Build a Better Developer Setup
               </h2>
               <p className="mt-4 font-sans text-base text-paper/70 leading-relaxed max-w-[44ch]">
-                Get the latest setup ideas, product recommendations, and productivity tips.
+                Get developer setup ideas, coding gear recommendations and productivity tips.
               </p>
             </div>
             <div className="lg:col-span-5">
