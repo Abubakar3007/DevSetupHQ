@@ -10,7 +10,11 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as CategoriesRouteImport } from './routes/categories'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as GuidesIndexRouteImport } from './routes/guides.index'
+import { Route as GuidesSlugRouteImport } from './routes/guides.$slug'
 import { Route as ProductsIndexRouteImport } from './routes/products.index'
 import { Route as ProductsSlugRouteImport } from './routes/products.$slug'
 
@@ -19,9 +23,29 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const CategoriesRoute = CategoriesRouteImport.update({
   id: '/categories',
   path: '/categories',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesIndexRoute = GuidesIndexRouteImport.update({
+  id: '/guides/',
+  path: '/guides/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const GuidesSlugRoute = GuidesSlugRouteImport.update({
+  id: '/guides/$slug',
+  path: '/guides/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ProductsIndexRoute = ProductsIndexRouteImport.update({
@@ -37,35 +61,76 @@ const ProductsSlugRoute = ProductsSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/categories': typeof CategoriesRoute
+  '/contact': typeof ContactRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/guides/': typeof GuidesIndexRoute
   '/products/': typeof ProductsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/categories': typeof CategoriesRoute
+  '/contact': typeof ContactRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/guides': typeof GuidesIndexRoute
   '/products': typeof ProductsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/categories': typeof CategoriesRoute
+  '/contact': typeof ContactRoute
+  '/guides/$slug': typeof GuidesSlugRoute
   '/products/$slug': typeof ProductsSlugRoute
+  '/guides/': typeof GuidesIndexRoute
   '/products/': typeof ProductsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/categories' | '/products/$slug' | '/products/'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/categories'
+    | '/contact'
+    | '/guides/$slug'
+    | '/products/$slug'
+    | '/guides/'
+    | '/products/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/categories' | '/products/$slug' | '/products'
-  id: '__root__' | '/' | '/categories' | '/products/$slug' | '/products/'
+  to:
+    | '/'
+    | '/about'
+    | '/categories'
+    | '/contact'
+    | '/guides/$slug'
+    | '/products/$slug'
+    | '/guides'
+    | '/products'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/categories'
+    | '/contact'
+    | '/guides/$slug'
+    | '/products/$slug'
+    | '/guides/'
+    | '/products/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   CategoriesRoute: typeof CategoriesRoute
+  ContactRoute: typeof ContactRoute
+  GuidesSlugRoute: typeof GuidesSlugRoute
   ProductsSlugRoute: typeof ProductsSlugRoute
+  GuidesIndexRoute: typeof GuidesIndexRoute
   ProductsIndexRoute: typeof ProductsIndexRoute
 }
 
@@ -78,11 +143,39 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/categories': {
       id: '/categories'
       path: '/categories'
       fullPath: '/categories'
       preLoaderRoute: typeof CategoriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/': {
+      id: '/guides/'
+      path: '/guides'
+      fullPath: '/guides/'
+      preLoaderRoute: typeof GuidesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/guides/$slug': {
+      id: '/guides/$slug'
+      path: '/guides/$slug'
+      fullPath: '/guides/$slug'
+      preLoaderRoute: typeof GuidesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/products/': {
@@ -104,8 +197,12 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   CategoriesRoute: CategoriesRoute,
+  ContactRoute: ContactRoute,
+  GuidesSlugRoute: GuidesSlugRoute,
   ProductsSlugRoute: ProductsSlugRoute,
+  GuidesIndexRoute: GuidesIndexRoute,
   ProductsIndexRoute: ProductsIndexRoute,
 }
 export const routeTree = rootRouteImport
